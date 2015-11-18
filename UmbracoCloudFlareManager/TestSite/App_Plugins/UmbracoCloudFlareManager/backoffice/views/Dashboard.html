@@ -1,0 +1,84 @@
+﻿<umb-panel>
+    <div class="umb-pane">
+        <h3>CloudFlare General Settings</h3>
+
+        <form name="cloudFlareSettingsForm"
+              ng-submit="save(settings)"
+              ng-controller="UCFM.DashboardController"
+              val-form-manager>
+            
+            <umb-control-group label="Enable CloudFlare Manager" description="Automaticaly purging of published pages will be only performed if this setting is set up true.">
+                <input type="checkbox" class="umb-checkbox checkbox" ng-model="settings.EnableCloudFlare" value="{{settings.EnableCloudFlare}}" no-dirty-check />
+            </umb-control-group>
+
+            <umb-control-group label="CloudFlare E-mail" description="The email address associated with the CloudFlare account.">
+                <input type="email" class="umb-editor umb-textstring email" required ng-model="settings.CloudFlareEmail" no-dirty-check />
+            </umb-control-group>
+
+            <umb-control-group label="CloudFlare API Key" description="This is the API key made available on your CloudFlare Account page.">
+                <input type="text" class="umb-editor umb-textstring textstring" required ng-model="settings.CloudFlareApiKey" no-dirty-check />
+            </umb-control-group>
+
+            <umb-control-group label="Domain" description="Domain name configured on your CloudFlare Account page.">
+                <input type="text" class="umb-editor umb-textstring textstring" required ng-model="settings.Domain" no-dirty-check />
+            </umb-control-group>
+
+            <umb-control-group label="Purge Homepage" description="Purge Homepage whenever publish event occurs.">
+                <input type="checkbox" class="umb-checkbox checkbox" ng-model="settings.PurgeHomepage" value="{{settings.PurgeHomepage}}" no-dirty-check />
+            </umb-control-group>
+
+            <div ng-show="settings.PurgeHomepage">
+                <umb-control-group label="Homepage" description="Select Homepage node.">
+                    <div>
+                        <h5>Selected Node</h5>
+                        <ul class="unstyled list-icons" ng-if="selectedHomepage">
+                            <li>
+                                <i class="icon icon-delete red hover-show pull-right" ng-click="clearHomepage()"></i>
+
+                                <i class="icon {{selectedHomepage.icon}} hover-hide"></i>
+                                {{selectedHomepage.name}}
+                            </li>
+                        </ul>
+                    </div>
+                    <p>
+                        <input type="button" ng-click="pickHomepage()" class="btn" value="Pick Homepage" />
+                        <input type="button" ng-click="clearHomepage()" ng-show="selectedHomepage" class="btn btn-danger" value="Clear Homepage" />
+                    </p>
+                </umb-control-group>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
+                    <localize key="buttons_save">Save</localize>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="umb-pane" ng-controller="UCFM.DashboardController">
+        <h3>Test Connection</h3>
+        <p>Check if Umbraco can connect to CloudFlare's server and retrieve domain related to your website.</p>
+
+        <div class="btn-group">
+            <input type="button" value="Test Connection" class="btn btn-default" ng-click="testConnection()">
+        </div>
+    </div>
+
+    <div class="umb-pane">
+        <h3>URL Purger</h3>
+        <p>Input URLs which you want to purge on CloudFlare. One URL per line.</p>
+
+        <form name="cloudFlarePurgerForm"
+              ng-submit="purgeUrls(urls)"
+              ng-controller="UCFM.DashboardController"
+              val-form-manager>
+            <umb-control-group label="" description="" hide-label="true">
+                <textarea style="width: 100%" rows="10" ng-model="$parent.urls" required no-dirty-check />
+            </umb-control-group>
+
+            <div class="btn-group">
+                <input type="submit" value="Purge URLs" class="btn btn-default">
+            </div>
+        </form>
+    </div>
+</umb-panel>

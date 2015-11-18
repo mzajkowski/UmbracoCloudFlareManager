@@ -1,0 +1,1 @@
+Tool helping manage CloudFlare (https://www.cloudflare.com/) settings and cache purging from Umbraco website backoffice. Still needs a lot of improvements, contains only basic functionalities at that moment. Looking for contributors wanting to help push it forward.

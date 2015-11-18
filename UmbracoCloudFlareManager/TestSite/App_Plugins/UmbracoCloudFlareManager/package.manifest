@@ -1,0 +1,8 @@
+{
+    "css": [ 
+    ],
+    "javascript": [
+        "~/App_Plugins/UmbracoCloudFlareManager/assets/umbracocloudflaremanager.resource.js",
+        "~/App_Plugins/UmbracoCloudFlareManager/assets/umbracocloudflaremanager.controller.js"
+    ]
+}

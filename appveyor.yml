@@ -1,0 +1,18 @@
+# version format
+version: 1.0.0.{build}
+
+# Do not build on tags
+skip_tags: true
+
+build_script:
+  - cd Build
+  - Package.build.cmd
+
+artifacts:
+  - path: Releases\*.nupkg
+
+deploy:
+  provider: NuGet
+  server:
+  api_key: 19305310-840e-4b7c-b9de-a9ac9dd94129
+  artifact: /.*\.nupkg/
